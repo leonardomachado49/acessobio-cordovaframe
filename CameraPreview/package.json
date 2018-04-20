@@ -1,0 +1,16 @@
+{
+  "name": "io-acesso-face-capture",
+  "version": "0.0.1",
+  "description": "Cordova plugin for Acesso Biometry",
+  "keywords": [
+    "cordova"
+  ],
+  "author": {
+    "name": "Daniel Zanelatto",
+    "email": "daniel.zanelatto@acesso.io"
+  },
+  "dependencies": {
+    "cordova": "*"
+  },
+  "devDependencies": {}
+}
