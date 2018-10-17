@@ -54,7 +54,7 @@ class CustomSurfaceView extends SurfaceView implements SurfaceHolder.Callback{
     float right = 0;
     float bottom = 0;
 
-    if (pictureWidth == 1280 && pictureHeight == 720) {
+    /*if (pictureWidth == 1280 && pictureHeight == 720) {
       rectW = (pictureWidth / (2.0F / (canvas.getHeight() / 1280F)));
       rectH = (pictureHeight / (0.8F  /(canvas.getWidth() / 720F)));
 
@@ -62,7 +62,25 @@ class CustomSurfaceView extends SurfaceView implements SurfaceHolder.Callback{
       top = centerOfCanvas.y - (rectH / 2);
       right = centerOfCanvas.x + (rectW / 2);
       bottom = centerOfCanvas.y + (rectH / 2);
-    }
+    }*/
+	
+	float currentScreenRatio = (float)canvas.getHeight() / (float)canvas.getWidth();
+	currentScreenRatio = Math.round(currentScreenRatio * 100F) / 100F;
+	float regularScreenRatio = (16F / 9F);
+	regularScreenRatio = Math.round(regularScreenRatio * 100F) / 100F;
+
+	if (currentScreenRatio == regularScreenRatio) {
+		rectW = (pictureWidth / (2.0F / (canvas.getHeight() / 1280F)));
+		rectH = (pictureHeight / (0.8F /(canvas.getWidth() / 720F)));
+	} else {
+		rectW = (pictureWidth / (2.0F / (canvas.getHeight() / 1280F)));
+		rectH = (pictureHeight / (1.0F / (canvas.getWidth() / 720F)));
+	}
+
+	left = centerOfCanvas.x - (rectW / 2);
+	top = centerOfCanvas.y - (rectH / 2);
+	right = centerOfCanvas.x + (rectW / 2);
+	bottom = centerOfCanvas.y + (rectH / 2);
 
     // Desenha o faceframe.png no canvas
     Drawable drawable = getResources().getDrawable(this.drawableFace);

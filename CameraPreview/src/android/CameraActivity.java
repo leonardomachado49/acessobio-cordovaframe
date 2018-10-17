@@ -379,13 +379,24 @@ public class CameraActivity extends Fragment {
       try {
 
         Bitmap bitmap = BitmapFactory.decodeByteArray(data, 0, data.length);
+		
+		Camera.CameraInfo info = new Camera.CameraInfo();
+        Camera.getCameraInfo(cameraCurrentlyLocked, info);
         if(cameraCurrentlyLocked == Camera.CameraInfo.CAMERA_FACING_FRONT) {
+			int rotation = (info.orientation == 90) ? 270 : 90;
+			bitmap = rotateBitmap(bitmap, rotation);
+			bitmap = flipBitmap(bitmap);
+        } else {
+			bitmap = rotateBitmap(bitmap, 90);
+        }
+		
+        /*if(cameraCurrentlyLocked == Camera.CameraInfo.CAMERA_FACING_FRONT) {
           bitmap = rotateBitmap(bitmap, 270);
           bitmap = flipBitmap(bitmap);
 
         } else {
           bitmap = rotateBitmap(bitmap, 90);
-        }
+        }*/
 
         String encodedImage = toBase64(bitmap);
 
